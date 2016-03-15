@@ -9,21 +9,22 @@ import android.os.Handler;
 
 
 
-public class Decente extends View implements Runnable{
-    public Context ctx;
+public class GameView extends View implements Runnable{
     public Paint p;
     public Handler handler = new Handler();
     float x = 0;
     float y = 0;
-    public Decente (Context c){
+    public Player player;
+    public GameView (Context c){
         super(c);
-        init();
+        init(c);
     }
 
-    private void init()
+    private void init(Context c)
     {
         p = new Paint();
         p.setColor(Color.RED);
+        player = new Player(50,50,c);
     }
 
     @Override
@@ -34,6 +35,7 @@ public class Decente extends View implements Runnable{
         y+=15;
         invalidate();
         canvas.drawCircle(x, y, 30, p);
+        player.Draw(canvas);
     }
     @Override
     public void run(){
